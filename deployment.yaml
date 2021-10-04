@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: oms-shipping
-  namespace: app
+  namespace: order-domain
   labels:
     app: oms-shipping
 spec:
