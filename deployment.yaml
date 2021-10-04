@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oms-customer
+  name: oms-shipping
   namespace: app
   labels:
-    app: oms-customer
+    app: oms-shipping
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oms-customer
+      app: oms-shipping
   template:
     metadata:
       labels:
-        app: oms-customer
+        app: oms-shipping
     spec:
       containers:
-      - name: oms-customer
-        image: manishsrivastavaggn/oms-customers:changeMePlease
+      - name: oms-shipping
+        image: manishsrivastavaggn/oms-shipping:changeMePlease
         ports:
         - containerPort: 8080
    
