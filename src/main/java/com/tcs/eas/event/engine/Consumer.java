@@ -74,16 +74,16 @@ public class Consumer {
 		MailData data = new MailData();
 		data.setCustomer(customer);
 		data.setDop(order.getDop());
-		data.setMailTemplate(1);
+		//data.setMailTemplate(1);
 		data.setOrderId(order.getOrderid());
 		data.setProduct(product);
 		data.setTrackingNumber(Utility.getTrackingNumber());
-		data.setDod(new Date(System.currentTimeMillis()));
-		producer.sendMessageToMailTopic(getMailDataInJson(data));
+		//data.setDod(new Date(System.currentTimeMillis()));
+		//producer.sendMessageToMailTopic(getMailDataInJson(data));
 		data.setMailTemplate(2);
 		producer.sendMessageToMailTopic(getMailDataInJson(data));
-		data.setMailTemplate(3);
-		producer.sendMessageToMailTopic(getMailDataInJson(data));
+		//data.setMailTemplate(3);
+		//producer.sendMessageToMailTopic(getMailDataInJson(data));
 	}
 
 	/**
