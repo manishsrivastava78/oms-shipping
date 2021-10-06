@@ -1,14 +1,11 @@
 package com.tcs.eas.event.engine;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -54,6 +51,8 @@ public class Consumer {
 
 	@KafkaListener(topics = "${KAFKA_SHIPPING_TOPIC}", groupId = "${KAFKA_SHIPPING_TOPIC_CLIENT_GROUP_ID}")
 	public void consume(String message) throws IOException {
+		
+		logger.info("Inside in consumer...");
 		ObjectMapper objectMapper = new ObjectMapper();
 		Order order = objectMapper.readValue(message, Order.class);
 		// System.out.println(
@@ -62,8 +61,10 @@ public class Consumer {
 		logger.info(String.format("consumer 0#### -> Consumed message -> %s", message));
 		// get customer details using customerid
 		Customer customer = getCustomer(order.getCustomerid());
+		logger.info("Customer object:"+customer);
 		// get product details using productid
 		Product product = getProduct(order.getProductid());
+		logger.info("Product object:"+product);
 		// out of scope
 		// do shipping task and insert shipping data into shipping table
 		//in scope
@@ -78,6 +79,8 @@ public class Consumer {
 		data.setOrderId(order.getOrderid());
 		data.setProduct(product);
 		data.setTrackingNumber(Utility.getTrackingNumber());
+		
+		logger.info("Tracking number..."+data.getTrackingNumber());
 		//data.setDod(new Date(System.currentTimeMillis()));
 		//producer.sendMessageToMailTopic(getMailDataInJson(data));
 		data.setMailTemplate(2);
@@ -131,12 +134,12 @@ public class Consumer {
 		String json = "";
 		try {
 			json = mapper.writeValueAsString(mailData);
-			System.out.println("ResultingJSONstring = " + json);
+			System.out.println("Manish Test ResultingJSONstring = " + json);
 			// System.out.println(json);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
+		
 		return json;
 	}
 }
