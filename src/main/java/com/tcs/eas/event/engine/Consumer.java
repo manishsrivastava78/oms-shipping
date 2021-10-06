@@ -89,7 +89,7 @@ public class Consumer {
 		data.setProduct(product);
 		data.setTrackingNumber(Utility.getTrackingNumber());
 		
-		logger.info("Tracking number..."+data.getTrackingNumber());
+		logger.info("Tracking number....."+data.getTrackingNumber());
 		//data.setDod(new Date(System.currentTimeMillis()));
 		//producer.sendMessageToMailTopic(getMailDataInJson(data));
 		data.setMailTemplate(2);
