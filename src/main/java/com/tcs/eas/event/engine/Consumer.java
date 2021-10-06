@@ -18,6 +18,7 @@ import com.tcs.eas.event.model.Customer;
 import com.tcs.eas.event.model.MailData;
 import com.tcs.eas.event.model.Order;
 import com.tcs.eas.event.model.Product;
+import com.tcs.eas.event.model.Tracking;
 import com.tcs.eas.event.utility.Utility;
 
 /**
@@ -39,6 +40,14 @@ public class Consumer {
 	
 	@Value(value = "${PRODUCT_SERVICE_PORT}")
 	private int productServicePort; 
+	
+	@Value(value = "${TRACKING_SERVICE_HOST}")
+	private String trackingServiceHost; 
+	
+	@Value(value = "${TRACKING_SERVICE_PORT}")
+	private int trackingServicePort;
+	
+	
 	
 	
 	@Autowired
@@ -85,10 +94,43 @@ public class Consumer {
 		//producer.sendMessageToMailTopic(getMailDataInJson(data));
 		data.setMailTemplate(2);
 		producer.sendMessageToMailTopic(getMailDataInJson(data));
+		createTrackingRecord(data.getTrackingNumber(), data.getOrderId(), customer.getCustomerid(), product.getProductid(), "Order is shipped");
 		//data.setMailTemplate(3);
 		//producer.sendMessageToMailTopic(getMailDataInJson(data));
 	}
 
+	/**
+	 * 
+	 * @param trackingNumber
+	 * @param orderId
+	 * @param customerId
+	 * @param productId
+	 * @param remarks
+	 */
+	private void createTrackingRecord(String trackingNumber,int orderId,int customerId,int productId,String remarks) {
+		RestTemplate restTemplate = new RestTemplate();
+		Tracking tracking = new Tracking();
+		tracking.setCustomerid(customerId);
+		tracking.setOrderid(orderId);
+		tracking.setProductid(productId);
+		tracking.setRemarks(remarks);
+		tracking.setStatus(2);
+		tracking.setTrackingnumber(trackingNumber);
+		
+		//String trackingUrl = "http://localhost:8080/apis/v1/trackings";
+		String trackingUrl = "http://"+trackingServiceHost+":"+trackingServicePort+"/apis/v1/trackings";
+		try {
+			ResponseEntity<String> result = restTemplate.postForEntity(trackingUrl, tracking, String.class);
+			logger.info("Result Status:"+result.getStatusCodeValue());
+		} catch (Exception e) {
+			loggingService.logError(e.getMessage());
+		}
+	}
+	
+	/*
+	 * public static void main(String[] args) { Consumer c = new Consumer();
+	 * c.createTrackingRecord("dasdasd", 123, 233, 33, "dsad"); }
+	 */
 	/**
 	 *  
 	 * @return

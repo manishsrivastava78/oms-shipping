@@ -17,24 +17,24 @@ public class Tracking implements Serializable {
 	private static final long serialVersionUID = 4735202356226217716L;
 
 	/**
-	 * Unique tracking id to check the status of the order
+	 * Unique tracking number to check the status of the order
 	 */
-	private int trackingId;
+	private String trackingnumber;
 
 	/**
 	 * Unique order id to identify the order
 	 */
-	private int orderId;
+	private int orderid;
 
 	/**
 	 * Unique customer id to identify the customer
 	 */
-	private int customerId;
+	private int customerid;
 
 	/**
 	 * Unique product id to identify the product
 	 */
-	private int productId;
+	private int productid;
 
 	/**
 	 * Status of the order 1=Order Confirmation 2=Shipment Confirmation 3=Delivery
@@ -43,59 +43,64 @@ public class Tracking implements Serializable {
 	private int status;
 
 	/**
-	 * @return the trackingId
+	 * Remarks for any update
 	 */
-	public int getTrackingId() {
-		return trackingId;
+	private String remarks;
+
+	/**
+	 * @return the trackingnumber
+	 */
+	public String getTrackingnumber() {
+		return trackingnumber;
 	}
 
 	/**
-	 * @param trackingId the trackingId to set
+	 * @param trackingnumber the trackingnumber to set
 	 */
-	public void setTrackingId(int trackingId) {
-		this.trackingId = trackingId;
+	public void setTrackingnumber(String trackingnumber) {
+		this.trackingnumber = trackingnumber;
 	}
 
 	/**
-	 * @return the orderId
+	 * @return the orderid
 	 */
-	public int getOrderId() {
-		return orderId;
+	public int getOrderid() {
+		return orderid;
 	}
 
 	/**
-	 * @param orderId the orderId to set
+	 * @param orderid the orderid to set
 	 */
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
 	}
 
 	/**
-	 * @return the customerId
+	 * @return the customerid
 	 */
-	public int getCustomerId() {
-		return customerId;
+	public int getCustomerid() {
+		return customerid;
 	}
 
 	/**
-	 * @param customerId the customerId to set
+	 * @param customerid the customerid to set
 	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerid(int customerid) {
+		this.customerid = customerid;
 	}
 
 	/**
-	 * @return the productId
+	 * @return the productid
 	 */
-	public int getProductId() {
-		return productId;
+	public int getProductid() {
+		return productid;
 	}
 
 	/**
-	 * @param productId the productId to set
+	 * @param productid the productid to set
 	 */
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProductid(int productid) {
+		this.productid = productid;
 	}
 
 	/**
@@ -111,4 +116,20 @@ public class Tracking implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	/**
+	 * @return the remarks
+	 */
+	public String getRemarks() {
+		return remarks;
+	}
+
+	/**
+	 * @param remarks the remarks to set
+	 */
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	
+	
 }
