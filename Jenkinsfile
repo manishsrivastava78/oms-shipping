@@ -7,8 +7,8 @@ pipeline {
     }
    
 	 environment{
-        DOCKER_USERNAME = credentials('DOCKER_USERNAME')
-        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+        DOCKER_USERNAME = credentials('NAVJOT_DOCKER_USERNAME')
+        DOCKER_PASSWORD = credentials('NAVJOT_DOCKER_PASSWORD')
     }
 	
     stages {
@@ -41,7 +41,7 @@ pipeline {
                 sh script: '''
                 #!/bin/bash
                 cd $WORKSPACE/oms-shipping/
-                docker build -t manishsrivastavaggn/oms-shipping:${BUILD_NUMBER} .
+                docker build -t navjotdis/oms-shipping:${BUILD_NUMBER} .
                 '''
             }
         }
@@ -57,7 +57,7 @@ pipeline {
              stage('Push docker image') {
             steps{
                 sh(script: """
-                    docker push manishsrivastavaggn/oms-shipping:${BUILD_NUMBER}
+                    docker push navjotdis/oms-shipping:${BUILD_NUMBER}
                 """)
             }
         }
