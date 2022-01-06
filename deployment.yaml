@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: oms-shipping
-        image: manishsrivastavaggn/oms-shipping:changeMePlease
+        image: navjotdis/oms-shipping:changeMePlease
         ports:
         - containerPort: 8080
    
