@@ -38,6 +38,14 @@ pipeline {
               }
         }
         
+	     stage('docker login again') {
+            steps{
+                sh(script: """
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                """, returnStdout: true) 
+            }
+        }    
+	    
          stage('docker build') {
             steps{
                 sh script: '''
